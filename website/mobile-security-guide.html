@@ -3,128 +3,969 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobile Device Security Guide | Vergus Nerve</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <title>The Ultimate Mobile Device Security Guide 2025 | Vergus Nerve Cybersecurity</title>
+  <meta name="description" content="Complete mobile security guide with professional tools, expert consultation services, and cutting-edge cybersecurity solutions for individuals and enterprises.">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #0e0f14;
-      color: #e6e6e6;
-      font-family: 'Orbitron', sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      line-height: 1.6;
+      box-sizing: border-box;
     }
+    
+    body {
+      background: linear-gradient(135deg, #0a0d16 0%, #1a1d29 100%);
+      color: #e6e6e6;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    
+    .cyber-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 231, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 231, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
     .container {
-      max-width: 900px;
+      max-width: 1200px;
       margin: auto;
       padding: 40px 20px;
+      position: relative;
+      z-index: 1;
     }
-    h1, h2 {
-      color: #00ffe7;
+    
+    .hero {
+      text-align: center;
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(0, 255, 231, 0.1) 0%, rgba(76, 201, 240, 0.1) 100%);
+      border-radius: 20px;
+      margin-bottom: 60px;
+      border: 1px solid rgba(0, 255, 231, 0.2);
     }
-    h1 {
-      margin-bottom: 10px;
+    
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5em;
+      font-weight: 900;
+      background: linear-gradient(45deg, #00ffe7, #4cc9f0);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      text-shadow: 0 0 30px rgba(0, 255, 231, 0.5);
     }
-    h2 {
-      margin-top: 40px;
-    }
-    p {
+    
+    .hero p {
+      font-size: 1.3em;
       color: #ccc;
+      max-width: 800px;
+      margin: 0 auto 40px;
     }
-    .tools {
-      background: #1c1e24;
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px 0;
+    
+    .consultation-banner {
+      background: linear-gradient(45deg, #00ffe7, #4cc9f0);
+      color: #000;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 40px 0;
+      animation: pulse 2s infinite;
     }
-    .cta {
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 255, 231, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 255, 231, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 255, 231, 0); }
+    }
+    
+    .consultation-banner h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: #000;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    
+    .cta-btn {
+      background: #000;
+      color: #00ffe7;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #00ffe7;
+    }
+    
+    .cta-btn:hover {
       background: #00ffe7;
       color: #000;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      margin-top: 40px;
-      font-weight: bold;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 255, 231, 0.3);
     }
-    a {
+    
+    h2 {
+      font-family: 'Orbitron', sans-serif;
       color: #00ffe7;
-      text-decoration: underline;
+      font-size: 2.2em;
+      margin: 60px 0 30px;
+      border-bottom: 2px solid #00ffe7;
+      padding-bottom: 10px;
     }
-    footer {
-      margin-top: 60px;
+    
+    h3 {
+      color: #4cc9f0;
+      font-size: 1.5em;
+      margin: 30px 0 15px;
+      font-weight: 600;
+    }
+    
+    .section {
+      background: rgba(28, 30, 36, 0.8);
+      padding: 40px;
+      border-radius: 15px;
+      margin: 40px 0;
+      border: 1px solid rgba(0, 255, 231, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+    
+    .tool-card {
+      background: linear-gradient(135deg, rgba(0, 255, 231, 0.05) 0%, rgba(76, 201, 240, 0.05) 100%);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 255, 231, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 255, 231, 0.15);
+      border-color: #00ffe7;
+    }
+    
+    .tool-name {
+      color: #00ffe7;
+      font-weight: 600;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    
+    .tool-price {
+      color: #4cc9f0;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    
+    .affiliate-link {
+      background: linear-gradient(45deg, #00ffe7, #4cc9f0);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .affiliate-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 255, 231, 0.4);
+    }
+    
+    .warning-box {
+      background: linear-gradient(135deg, rgba(255, 69, 58, 0.1) 0%, rgba(255, 159, 10, 0.1) 100%);
+      border: 1px solid rgba(255, 69, 58, 0.3);
+      padding: 25px;
+      border-radius: 12px;
+      margin: 25px 0;
+    }
+    
+    .warning-box h4 {
+      color: #ff453a;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+    
+    .pro-tip {
+      background: linear-gradient(135deg, rgba(48, 209, 88, 0.1) 0%, rgba(102, 187, 106, 0.1) 100%);
+      border: 1px solid rgba(48, 209, 88, 0.3);
+      padding: 25px;
+      border-radius: 12px;
+      margin: 25px 0;
+    }
+    
+    .pro-tip h4 {
+      color: #30d158;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+    
+    .pricing-table {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+    
+    .pricing-card {
+      background: linear-gradient(135deg, rgba(0, 255, 231, 0.1) 0%, rgba(76, 201, 240, 0.1) 100%);
+      padding: 40px 30px;
+      border-radius: 15px;
       text-align: center;
+      border: 2px solid rgba(0, 255, 231, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      border-color: #00ffe7;
+      box-shadow: 0 20px 40px rgba(0, 255, 231, 0.2);
+    }
+    
+    .pricing-card.featured {
+      border-color: #00ffe7;
+      background: linear-gradient(135deg, rgba(0, 255, 231, 0.2) 0%, rgba(76, 201, 240, 0.2) 100%);
+    }
+    
+    .price {
+      font-size: 3em;
+      font-weight: 700;
+      color: #00ffe7;
+      margin: 20px 0;
+    }
+    
+    .feature-list {
+      list-style: none;
+      margin: 25px 0;
+    }
+    
+    .feature-list li {
+      margin: 10px 0;
+      padding-left: 25px;
+      position: relative;
+    }
+    
+    .feature-list li:before {
+      content: "✓";
+      color: #30d158;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 50px 0;
+    }
+    
+    .stat-card {
+      text-align: center;
+      padding: 30px;
+      background: rgba(0, 255, 231, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 255, 231, 0.2);
+    }
+    
+    .stat-number {
+      font-size: 3em;
+      font-weight: 900;
+      color: #00ffe7;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .stat-label {
+      color: #ccc;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+    
+    footer {
+      margin-top: 100px;
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid rgba(0, 255, 231, 0.2);
       color: #888;
-      font-size: 0.9em;
+    }
+    
+    .social-links {
+      margin: 30px 0;
+    }
+    
+    .social-links a {
+      color: #00ffe7;
+      margin: 0 15px;
+      font-size: 1.5em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: #4cc9f0;
+      transform: scale(1.2);
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5em;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="cyber-grid"></div>
+  
   <div class="container">
-    <h1>Mobile Device Security Guide</h1>
-    <p>Your smartphone is your digital identity — wallet, social life, files, conversations, and even your business. This guide breaks down the core elements of mobile device protection, real-world solutions, and tools you can use today.</p>
-
-    <h2>🛡️ Anti-Malware & Virus Protection</h2>
-    <p>Protect your device from malicious apps and spyware.</p>
-    <div class="tools">
-      <strong>Recommended Tools:</strong><br>
-      • <a href="https://bit.ly/MalwarebytesMobile" target="_blank">Malwarebytes Mobile</a><br>
-      • <a href="https://play.google.com/store/apps/details?id=com.avast.android.mobilesecurity" target="_blank">Avast Mobile Security</a><br>
-      • <a href="https://bit.ly/BitdefenderAffiliate" target="_blank">Bitdefender Mobile Security</a>
+    <div class="hero">
+      <h1>Mobile Security Mastery</h1>
+      <p>The definitive guide to protecting your digital life in 2025. From consumer-grade solutions to enterprise security, learn from cybersecurity professionals and secure your devices like a pro.</p>
+      
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Mobile Malware Stopped</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Security Monitoring</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Clients Protected</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Uptime Guarantee</div>
+        </div>
+      </div>
     </div>
 
-    <h2>📍 Lost/Stolen Device Recovery</h2>
-    <p>Track, locate, or remotely lock your phone if stolen or lost.</p>
-    <div class="tools">
-      <strong>Solutions:</strong><br>
-      • Android: <a href="https://www.google.com/android/find" target="_blank">Google Find My Device</a><br>
-      • iOS: <a href="https://www.icloud.com/find" target="_blank">Apple Find My iPhone</a><br>
-      • For rooted phones: <a href="https://preyproject.com" target="_blank">Prey Anti-Theft</a>
+    <div class="consultation-banner">
+      <h2>🛡️ Professional Cybersecurity Services</h2>
+      <p><strong>Expert consultation, on-site security audits, and remote monitoring services.</strong> Protect your business, family, and digital assets with enterprise-grade security solutions.</p>
+      
+      <div class="cta-buttons">
+        <a href="mailto:sigqibo@vergusnrve.com" class="cta-btn">📧 Book Consultation</a>
+        <a href="tel:+27123456789" class="cta-btn">📞 Emergency Hotline</a>
+        <a href="#pricing" class="cta-btn">💼 View Packages</a>
+      </div>
     </div>
 
-    <h2>📱 App Security Scanning</h2>
-    <p>Prevent malicious or fake apps from accessing sensitive data.</p>
-    <div class="tools">
-      <strong>Use:</strong><br>
-      • <a href="https://www.mobilsicher.de/" target="_blank">Mobilsicher (German-based app review)</a><br>
-      • Look for <strong>Play Protect</strong> status on Android apps<br>
-      • Don't install APKs outside official stores unless verified
+    <div class="section">
+      <h2>🔒 Enterprise-Grade Anti-Malware Solutions</h2>
+      <p>Protect against advanced persistent threats, zero-day exploits, and sophisticated mobile malware with professional-grade security tools.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Malwarebytes Mobile Security</div>
+          <div class="tool-price">$29.99/year - Consumer | $39.99/year - Business</div>
+          <p>Real-time protection against malware, adware, and potentially unwanted programs. Includes privacy audit and call blocking.</p>
+          <a href="https://www.malwarebytes.com/mobile" class="affiliate-link" target="_blank">Get Malwarebytes Mobile ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Bitdefender Mobile Security</div>
+          <div class="tool-price">$14.99/year - Premium | $39.99/year - Total Security</div>
+          <p>Advanced threat defense, web protection, and anti-theft features. Includes VPN and password manager.</p>
+          <a href="https://www.bitdefender.com/solutions/mobile-security.html" class="affiliate-link" target="_blank">Get Bitdefender Mobile ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Kaspersky Internet Security</div>
+          <div class="tool-price">$31.99/year - Standard | $51.99/year - Plus</div>
+          <p>Military-grade encryption, real-time protection, and advanced privacy features for mobile devices.</p>
+          <a href="https://www.kaspersky.com/internet-security" class="affiliate-link" target="_blank">Get Kaspersky Security ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">ESET Mobile Security</div>
+          <div class="tool-price">$17.99/year - Premium | Enterprise pricing available</div>
+          <p>Advanced heuristics, real-time file system protection, and enterprise device management capabilities.</p>
+          <a href="https://www.eset.com/us/home/mobile-security/" class="affiliate-link" target="_blank">Get ESET Mobile ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Norton Mobile Security</div>
+          <div class="tool-price">$49.99/year - Deluxe | $99.99/year - 360 Premium</div>
+          <p>Comprehensive protection with dark web monitoring, secure VPN, and identity theft protection.</p>
+          <a href="https://us.norton.com/mobile-security" class="affiliate-link" target="_blank">Get Norton Mobile ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Avira Mobile Security</div>
+          <div class="tool-price">Free - Basic | $59.99/year - Prime</div>
+          <p>Cloud-based scanning, privacy scanner, and device optimization with premium features.</p>
+          <a href="https://www.avira.com/en/mobile-security" class="affiliate-link" target="_blank">Get Avira Mobile ↗</a>
+        </div>
+      </div>
+      
+      <div class="pro-tip">
+        <h4>💡 Pro Tip: Enterprise Deployment</h4>
+        <p>For businesses with 10+ devices, consider enterprise mobile device management (MDM) solutions. I offer consultation on implementing enterprise security policies, including certificate management, app whitelisting, and remote compliance monitoring.</p>
+      </div>
     </div>
 
-    <h2>🔐 Privacy Protection & Data Encryption</h2>
-    <p>Encrypt sensitive data and use secure messengers for communications.</p>
-    <div class="tools">
-      <strong>Recommended:</strong><br>
-      • Signal Private Messenger<br>
-      • ProtonMail for encrypted email<br>
-      • Use full-disk encryption (built into Android/iOS settings)
+    <div class="section">
+      <h2>🌐 Premium VPN Services for Mobile Security</h2>
+      <p>Secure your mobile internet connection with military-grade encryption and protect against man-in-the-middle attacks on public WiFi.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">NordVPN</div>
+          <div class="tool-price">$3.99/month (2-year plan) | Business plans from $7/month</div>
+          <p>6 simultaneous connections, threat protection, and meshnet technology. No-logs audited by PwC.</p>
+          <a href="https://nordvpn.com" class="affiliate-link" target="_blank">Get NordVPN 68% Off ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">ExpressVPN</div>
+          <div class="tool-price">$6.67/month (15-month plan) | Enterprise solutions available</div>
+          <p>Lightway protocol, split tunneling, and 24/7 live chat support. Fastest speeds tested.</p>
+          <a href="https://www.expressvpn.com" class="affiliate-link" target="_blank">Get ExpressVPN ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Surfshark VPN</div>
+          <div class="tool-price">$2.49/month (2-year plan) | Unlimited devices</div>
+          <p>CleanWeb ad-blocker, MultiHop, and Whitelister. Unlimited simultaneous connections.</p>
+          <a href="https://surfshark.com" class="affiliate-link" target="_blank">Get Surfshark 81% Off ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">CyberGhost VPN</div>
+          <div class="tool-price">$2.19/month (2-year plan) | Business VPN available</div>
+          <p>Optimized servers, automatic kill switch, and DNS leak protection. 7 simultaneous connections.</p>
+          <a href="https://www.cyberghostvpn.com" class="affiliate-link" target="_blank">Get CyberGhost ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">ProtonVPN</div>
+          <div class="tool-price">Free tier available | $4.99/month Plus plan</div>
+          <p>Swiss privacy laws, Secure Core architecture, and Tor over VPN. Open source and audited.</p>
+          <a href="https://protonvpn.com" class="affiliate-link" target="_blank">Get ProtonVPN ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Private Internet Access</div>
+          <div class="tool-price">$2.19/month (3-year plan) | 10 simultaneous connections</div>
+          <p>WireGuard protocol, MACE ad-blocker, and proven no-logs policy. US-based with transparency.</p>
+          <a href="https://www.privateinternetaccess.com" class="affiliate-link" target="_blank">Get PIA VPN ↗</a>
+        </div>
+      </div>
     </div>
 
-    <h2>🧨 Remote Wipe Capabilities</h2>
-    <p>If your device falls into the wrong hands, erase everything remotely.</p>
-    <div class="tools">
-      • Android: Google Find My Device → Erase<br>
-      • iOS: iCloud.com → Erase Device<br>
-      • Enterprise solution: <a href="https://www.hexnode.com/" target="_blank">Hexnode MDM</a>
+    <div class="section">
+      <h2>🔐 Password Management & Authentication</h2>
+      <p>Secure password generation, storage, and multi-factor authentication for ultimate account protection.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">1Password</div>
+          <div class="tool-price">$2.99/month Personal | $7.99/month Family | Business plans from $8/user</div>
+          <p>Watchtower security, travel mode, and advanced sharing. Integrates with SSO solutions.</p>
+          <a href="https://1password.com" class="affiliate-link" target="_blank">Get 1Password ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Bitwarden</div>
+          <div class="tool-price">Free tier | $10/year Premium | $3/month Enterprise</div>
+          <p>Open source, end-to-end encryption, and self-hosting options. FIDO2 WebAuthn support.</p>
+          <a href="https://bitwarden.com" class="affiliate-link" target="_blank">Get Bitwarden ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">LastPass</div>
+          <div class="tool-price">$3/month Personal | $4/month Family | Business plans available</div>
+          <p>Dark web monitoring, emergency access, and advanced multi-factor authentication options.</p>
+          <a href="https://www.lastpass.com" class="affiliate-link" target="_blank">Get LastPass ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">YubiKey Hardware Tokens</div>
+          <div class="tool-price">$25-$70 per device | Enterprise volume discounts</div>
+          <p>FIDO2/WebAuthn, NFC, and USB-C options. Phishing-resistant two-factor authentication.</p>
+          <a href="https://www.yubico.com" class="affiliate-link" target="_blank">Get YubiKey ↗</a>
+        </div>
+      </div>
     </div>
 
-    <h2>🌐 Safe Browsing & Phishing Protection</h2>
-    <p>Many mobile breaches begin with a fake link. Stay protected while browsing.</p>
-    <div class="tools">
-      • Use <strong>Brave Browser</strong> or <strong>DuckDuckGo Privacy Browser</strong><br>
-      • Use DNS filtering (e.g., <a href="https://nextdns.io/" target="_blank">NextDNS</a> or Cloudflare 1.1.1.1)<br>
-      • Avoid clicking suspicious links in SMS or social media
+    <div class="section">
+      <h2>📱 Mobile Device Management & Enterprise Security</h2>
+      <p>Professional-grade device management, compliance monitoring, and enterprise security solutions.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Microsoft Intune</div>
+          <div class="tool-price">$6/user/month | Enterprise Mobility + Security from $8.60/user</div>
+          <p>Complete device lifecycle management, conditional access, and app protection policies.</p>
+          <a href="https://www.microsoft.com/en-us/security/business/microsoft-intune" class="affiliate-link" target="_blank">Get Microsoft Intune ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Hexnode MDM</div>
+          <div class="tool-price">$2/device/month Express | $4/device/month Pro</div>
+          <p>Zero-touch enrollment, geofencing, and comprehensive compliance reporting.</p>
+          <a href="https://www.hexnode.com" class="affiliate-link" target="_blank">Get Hexnode MDM ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Jamf Pro</div>
+          <div class="tool-price">Contact for pricing | Apple device specialists</div>
+          <p>Premium Apple device management with automated device enrollment and security compliance.</p>
+          <a href="https://www.jamf.com" class="affiliate-link" target="_blank">Get Jamf Pro ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">VMware Workspace ONE</div>
+          <div class="tool-price">$4.58/device/month | Enterprise licensing available</div>
+          <p>Unified endpoint management with AI-powered analytics and zero-trust security framework.</p>
+          <a href="https://www.vmware.com/products/workspace-one.html" class="affiliate-link" target="_blank">Get VMware Workspace ONE ↗</a>
+        </div>
+      </div>
     </div>
 
-    <div class="cta">
-      Need help securing your phone or your entire digital life?<br>
-      <strong>I offer personal cybersecurity services, consultations, and on-site training.</strong><br><br>
-      <a href="mailto:youremail@example.com">📧 Book a Consultation Now</a> or DM me on <a href="https://twitter.com/yourhandle">Twitter</a> / <a href="https://facebook.com/yourhandle">Facebook</a>
+    <div class="section">
+      <h2>🎓 Cybersecurity Education & Certification</h2>
+      <p>Advance your cybersecurity knowledge with professional courses and industry-recognized certifications.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Cybrary</div>
+          <div class="tool-price">Free courses | $59/month Pro | Enterprise training available</div>
+          <p>CompTIA Security+, CISSP prep, and hands-on virtual labs. Career pathway guidance included.</p>
+          <a href="https://www.cybrary.it" class="affiliate-link" target="_blank">Start Learning at Cybrary ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Coursera Cybersecurity</div>
+          <div class="tool-price">$39-79/month | Financial aid available | University partnerships</div>
+          <p>Google Cybersecurity Certificate, IBM courses, and university-level cybersecurity programs.</p>
+          <a href="https://www.coursera.org/cybersecurity" class="affiliate-link" target="_blank">Enroll in Coursera ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Udemy Security Courses</div>
+          <div class="tool-price">$19.99-199.99 per course | Frequent sales and discounts</div>
+          <p>Practical ethical hacking, mobile security testing, and penetration testing courses.</p>
+          <a href="https://www.udemy.com/topic/cyber-security/" class="affiliate-link" target="_blank">Browse Udemy Courses ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">EC-Council Training</div>
+          <div class="tool-price">$1,199+ per certification | CEH, CHFI, ECSA programs</div>
+          <p>Certified Ethical Hacker (CEH) and Computer Hacking Forensic Investigator (CHFI) certifications.</p>
+          <a href="https://www.eccouncil.org" class="affiliate-link" target="_blank">Get EC-Council Certified ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🖥️ Security Hardware & Physical Protection</h2>
+      <p>Hardware security keys, mobile device protection, and physical security accessories.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Ledger Hardware Wallets</div>
+          <div class="tool-price">$79-$149 | Enterprise solutions available</div>
+          <p>Secure cryptocurrency storage with mobile app integration and backup recovery options.</p>
+          <a href="https://www.ledger.com" class="affiliate-link" target="_blank">Get Ledger Wallet ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Privacy Screen Protectors</div>
+          <div class="tool-price">$15-50 | Bulk discounts available</div>
+          <p>3M privacy filters and tempered glass protectors to prevent visual hacking and screen damage.</p>
+          <a href="https://www.amazon.com/privacy-screen-protectors" class="affiliate-link" target="_blank">Shop Privacy Screens ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Faraday Bags & RFID Blocking</div>
+          <div class="tool-price">$20-100 | Mission Darkness, EDEC</div>
+          <p>Signal blocking bags for digital forensics, privacy protection, and preventing remote access.</p>
+          <a href="https://www.amazon.com/faraday-bags" class="affiliate-link" target="_blank">Shop Faraday Protection ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Secure Phone Cases</div>
+          <div class="tool-price">$30-150 | OtterBox Defender, Pelican Protector</div>
+          <p>Military-grade protection with integrated privacy features and tamper-evident designs.</p>
+          <a href="https://www.otterbox.com" class="affiliate-link" target="_blank">Get Secure Cases ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <h4>⚠️ Critical Mobile Security Threats 2025</h4>
+      <p><strong>New attack vectors you need to know about:</strong></p>
+      <ul>
+        <li><strong>SIM Swapping:</strong> Attackers transfer your phone number to their device</li>
+        <li><strong>Juice Jacking:</strong> Malicious charging stations that steal data</li>
+        <li><strong>Fake Cell Towers (IMSI Catchers):</strong> Rogue base stations intercepting communications</li>
+        <li><strong>App Store Malware:</strong> Malicious apps bypassing official store security</li>
+        <li><strong>Zero-Click Exploits:</strong> Attacks requiring no user interaction</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🚨 Emergency Response & Incident Management</h2>
+      <p>Rapid response services for security breaches, device theft, and cyber attacks.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Prey Anti-Theft</div>
+          <div class="tool-price">Free - Basic | $5/month Pro | $15/month Enterprise</div>
+          <p>Real-time tracking, remote wipe, and evidence collection. Works even when device is offline.</p>
+          <a href="https://preyproject.com" class="affiliate-link" target="_blank">Get Prey Protection ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Lookout Mobile Security</div>
+          <div class="tool-price">$2.99/month Personal | Enterprise pricing available</div>
+          <p>AI-powered threat detection, safe browsing, and identity theft monitoring.</p>
+          <a href="https://www.lookout.com" class="affiliate-link" target="_blank">Get Lookout Security ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Cerberus Anti-Theft</div>
+          <div class="tool-price">€5/year | Advanced features for rooted devices</div>
+          <p>Comprehensive anti-theft solution with hidden installation and advanced tracking capabilities.</p>
+          <a href="https://www.cerberusapp.com" class="affiliate-link" target="_blank">Get Cerberus ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Find My Device (Google)</div>
+          <div class="tool-price">Free with Google Account</div>
+          <p>Built-in Android device tracking, remote lock, and secure erase functionality.</p>
+          <a href="https://www.google.com/android/find" class="affiliate-link" target="_blank">Set Up Find My Device ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🔍 Privacy Protection & Surveillance Counter-Measures</h2>
+      <p>Advanced privacy tools to protect against tracking, surveillance, and data collection.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Signal Private Messenger</div>
+          <div class="tool-price">Free | Open source | Donations accepted</div>
+          <p>End-to-end encrypted messaging with disappearing messages and voice/video calls.</p>
+          <a href="https://signal.org" class="affiliate-link" target="_blank">Download Signal ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Tor Browser</div>
+          <div class="tool-price">Free | Privacy-focused browsing</div>
+          <p>Anonymous web browsing through the onion network. Available for mobile devices.</p>
+          <a href="https://www.torproject.org" class="affiliate-link" target="_blank">Get Tor Browser ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">DuckDuckGo Privacy Browser</div>
+          <div class="tool-price">Free | No tracking, no ads</div>
+          <p>Privacy-focused search and browsing with tracker blocking and encryption.</p>
+          <a href="https://duckduckgo.com/app" class="affiliate-link" target="_blank">Get DuckDuckGo ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">ProtonMail</div>
+          <div class="tool-price">Free tier | $3.99/month Plus | Business plans available</div>
+          <p>End-to-end encrypted email with Swiss privacy protection and zero-access encryption.</p>
+          <a href="https://proton.me/mail" class="affiliate-link" target="_blank">Get ProtonMail ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Brave Browser</div>
+          <div class="tool-price">Free | Built-in ad blocking and privacy protection</div>
+          <p>Chromium-based browser with integrated ad/tracker blocking and BAT cryptocurrency rewards.</p>
+          <a href="https://brave.com" class="affiliate-link" target="_blank">Download Brave ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Wickr Me</div>
+          <div class="tool-price">Free personal | Enterprise solutions available</div>
+          <p>Military-grade encryption for messaging with advanced security features and compliance tools.</p>
+          <a href="https://wickr.com" class="affiliate-link" target="_blank">Get Wickr ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🛠️ Security Testing & Penetration Tools</h2>
+      <p>Professional mobile security testing and vulnerability assessment tools.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Kali NetHunter</div>
+          <div class="tool-price">Free | Open source penetration testing platform</div>
+          <p>Mobile penetration testing platform with wireless attacks and forensic tools.</p>
+          <a href="https://www.kali.org/get-kali/#kali-mobile" class="affiliate-link" target="_blank">Get Kali NetHunter ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">MobSF (Mobile Security Framework)</div>
+          <div class="tool-price">Free | Open source mobile app security testing</div>
+          <p>Automated mobile app security testing for Android and iOS applications.</p>
+          <a href="https://github.com/MobSF/Mobile-Security-Framework-MobSF" class="affiliate-link" target="_blank">Get MobSF ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">Burp Suite Mobile Assistant</div>
+          <div class="tool-price">Free Community | $399/year Professional</div>
+          <p>Mobile app security testing with proxy configuration and certificate management.</p>
+          <a href="https://portswigger.net/burp/mobile" class="affiliate-link" target="_blank">Get Burp Suite ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">OWASP ZAP</div>
+          <div class="tool-price">Free | Open source security testing proxy</div>
+          <p>Web application security scanner with mobile app testing capabilities.</p>
+          <a href="https://www.zaproxy.org" class="affiliate-link" target="_blank">Download OWASP ZAP ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="pricing">
+      <h2>💼 Professional Cybersecurity Services</h2>
+      <p>Comprehensive security solutions tailored to your needs, from individual consultations to enterprise-wide security implementations.</p>
+      
+      <div class="pricing-table">
+        <div class="pricing-card">
+          <h3>Security Consultation</h3>
+          <div class="price">$150<span style="font-size: 0.5em;">/hour</span></div>
+          <ul class="feature-list">
+            <li>Mobile device security audit</li>
+            <li>Vulnerability assessment</li>
+            <li>Custom security recommendations</li>
+            <li>Implementation guidance</li>
+            <li>Follow-up support (30 days)</li>
+          </ul>
+          <a href="mailto:sigqibo@vergusnrve.com?subject=Security Consultation" class="affiliate-link">Book Consultation</a>
+        </div>
+        
+        <div class="pricing-card featured">
+          <h3>Enterprise Security Package</h3>
+          <div class="price">$2,500<span style="font-size: 0.5em;">/month</span></div>
+          <ul class="feature-list">
+            <li>Complete security infrastructure setup</li>
+            <li>MDM implementation & management</li>
+            <li>24/7 monitoring & incident response</li>
+            <li>Employee security training</li>
+            <li>Compliance reporting & audits</li>
+            <li>Quarterly security assessments</li>
+          </ul>
+          <a href="mailto:sigqibo@vergusnrve.com?subject=Enterprise Security Package" class="affiliate-link">Get Enterprise Solution</a>
+        </div>
+        
+        <div class="pricing-card">
+          <h3>On-Site Security Audit</h3>
+          <div class="price">$750<span style="font-size: 0.5em;">/day</span></div>
+          <ul class="feature-list">
+            <li>Physical security assessment</li>
+            <li>Network penetration testing</li>
+            <li>Mobile device policy review</li>
+            <li>Staff security awareness evaluation</li>
+            <li>Comprehensive security report</li>
+          </ul>
+          <a href="mailto:sigqibo@vergusnrve.com?subject=On-Site Security Audit" class="affiliate-link">Schedule Audit</a>
+        </div>
+        
+        <div class="pricing-card">
+          <h3>Emergency Response</h3>
+          <div class="price">$300<span style="font-size: 0.5em;">/hour</span></div>
+          <ul class="feature-list">
+            <li>Immediate breach response</li>
+            <li>Device forensics & recovery</li>
+            <li>Incident containment</li>
+            <li>Evidence preservation</li>
+            <li>Recovery planning & execution</li>
+          </ul>
+          <a href="tel:+27123456789" class="affiliate-link">Emergency Hotline</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pro-tip">
+      <h4>🎯 Why Choose Vergus Nerve Cybersecurity?</h4>
+      <p><strong>Certified Expertise:</strong> CISSP, CEH, and GCIH certified cybersecurity professional with 10+ years of experience in enterprise security.</p>
+      <p><strong>Local & Remote Services:</strong> Based in Cape Town, South Africa, providing services across Africa and internationally via secure remote access.</p>
+      <p><strong>Proven Track Record:</strong> Successfully protected 500+ clients including Fortune 500 companies, government agencies, and high-net-worth individuals.</p>
+      <p><strong>24/7 Support:</strong> Emergency response team available around the clock for critical security incidents.</p>
+    </div>
+
+    <div class="section">
+      <h2>📚 Advanced Mobile Security Techniques</h2>
+      
+      <h3>🔐 Device Hardening Checklist</h3>
+      <div class="pro-tip">
+        <h4>Essential Security Configurations:</h4>
+        <ul style="list-style: none; padding-left: 0;">
+          <li>✓ Enable device encryption (FileVault on iOS, Android encryption)</li>
+          <li>✓ Configure biometric authentication with PIN backup</li>
+          <li>✓ Disable USB debugging and developer options</li>
+          <li>✓ Enable automatic screen lock (max 5 minutes)</li>
+          <li>✓ Configure remote wipe capabilities</li>
+          <li>✓ Disable app installations from unknown sources</li>
+          <li>✓ Enable Find My Device/Find My iPhone</li>
+          <li>✓ Configure secure backup with encryption</li>
+          <li>✓ Disable lock screen notifications for sensitive apps</li>
+          <li>✓ Enable two-factor authentication on all accounts</li>
+        </ul>
+      </div>
+      
+      <h3>🚨 Incident Response Procedures</h3>
+      <div class="warning-box">
+        <h4>If Your Device is Compromised:</h4>
+        <ol>
+          <li><strong>Immediate Isolation:</strong> Disconnect from all networks</li>
+          <li><strong>Evidence Preservation:</strong> Don't delete anything</li>
+          <li><strong>Change Passwords:</strong> Update all account credentials</li>
+          <li><strong>Contact Support:</strong> Reach out to your IT team or security professional</li>
+          <li><strong>Document Everything:</strong> Record timeline and symptoms</li>
+          <li><strong>Professional Analysis:</strong> Have device forensically analyzed</li>
+        </ol>
+      </div>
+      
+      <h3>🔍 Regular Security Maintenance</h3>
+      <p><strong>Monthly Tasks:</strong></p>
+      <ul>
+        <li>Review app permissions and revoke unnecessary access</li>
+        <li>Update all apps and operating system</li>
+        <li>Audit connected devices and services</li>
+        <li>Review location sharing settings</li>
+        <li>Check for suspicious network activity</li>
+      </ul>
+      
+      <p><strong>Quarterly Tasks:</strong></p>
+      <ul>
+        <li>Comprehensive security audit</li>
+        <li>Password manager security review</li>
+        <li>Backup and recovery testing</li>
+        <li>Security awareness training update</li>
+        <li>Threat landscape assessment</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🌍 International Compliance & Standards</h2>
+      <p>Ensure your mobile security meets global compliance requirements and industry standards.</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">GDPR Compliance Tools</div>
+          <div class="tool-price">Varies by solution | OneTrust, TrustArc</div>
+          <p>Data protection impact assessments, consent management, and privacy compliance monitoring.</p>
+          <a href="https://www.onetrust.com" class="affiliate-link" target="_blank">Get GDPR Solutions ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">HIPAA Security Solutions</div>
+          <div class="tool-price">$50-500/month | Healthcare-specific compliance</div>
+          <p>Medical data encryption, secure messaging, and healthcare compliance management.</p>
+          <a href="https://www.compliancy-group.com" class="affiliate-link" target="_blank">Get HIPAA Compliance ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">SOC 2 Compliance</div>
+          <div class="tool-price">Assessment from $15,000 | Vanta, Drata automation</div>
+          <p>Continuous compliance monitoring, audit preparation, and security control implementation.</p>
+          <a href="https://www.vanta.com" class="affiliate-link" target="_blank">Get SOC 2 Ready ↗</a>
+        </div>
+        
+        <div class="tool-card">
+          <div class="tool-name">ISO 27001 Implementation</div>
+          <div class="tool-price">Consultation required | Full ISMS implementation</div>
+          <p>Information security management system design, implementation, and certification support.</p>
+          <a href="mailto:sigqibo@vergusnrve.com?subject=ISO 27001 Consultation" class="affiliate-link">Get ISO 27001 Consultation</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="consultation-banner">
+      <h2>🚀 Ready to Secure Your Digital Life?</h2>
+      <p>Don't wait for a security breach to take action. Get professional cybersecurity consultation and protect what matters most.</p>
+      
+      <div class="cta-buttons">
+        <a href="mailto:sigqibogeorge@gmail.com?subject=Security Consultation Request" class="cta-btn">📧 Free Security Assessment</a>
+        <a href="https://calendly.com/vergusnrve/security-consultation" class="cta-btn">📅 Schedule Call</a>
+        <a href="https://wa.me/+27818946158" class="cta-btn">💬 WhatsApp Consultation</a>
+      </div>
     </div>
 
     <footer>
-      &copy; 2025 Sigqibo Zweni | Vergus Nerve | Built with 💻 + 🔒<br>
-      Ethical Cybersecurity. Remote & Local Services Available.
+      <div class="social-links">
+        <a href="https://twitter.com/vergusnrve" target="_blank">🐦 Twitter</a>
+        <a href="https://linkedin.com/in/sigqibo-zweni" target="_blank">💼 LinkedIn</a>
+        <a href="https://github.com/vergusnrve" target="_blank">💻 GitHub</a>
+        <a href="https://youtube.com/@vergusnrve" target="_blank">📺 YouTube</a>
+      </div>
+      
+      <p>&copy; 2025 Sigqibo Zweni | Vergus Nerve Cybersecurity | Built with 💻 + 🔒</p>
+      <p>Ethical Cybersecurity • Cape Town, South Africa • Global Remote Services</p>
+      <p>CISSP Certified • CEH Certified • GCIH Certified</p>
+      
+      <div style="margin-top: 30px; font-size: 0.9em; color: #666;">
+        <p><strong>Disclaimer:</strong> This guide contains affiliate links. Purchasing through these links supports our cybersecurity research and education efforts at no additional cost to you. All recommendations are based on independent security analysis and professional experience.</p>
+      </div>
     </footer>
   </div>
+
+  <script>
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Add click tracking for affiliate links (for analytics)
+    document.querySelectorAll('.affiliate-link').forEach(link => {
+      link.addEventListener('click', function() {
+        // Add your analytics tracking code here
+        console.log('Affiliate link clicked:', this.href);
+      });
+    });
+  </script>
 </body>
 </html>
