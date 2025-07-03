@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" />
+    <meta name="description" content="Vergus Nerve provides personal, family, and business cybersecurity protection services. Learn, protect, and grow securely.">
+    <meta name="keywords" content="Cybersecurity, Mobile Protection, Digital Privacy, Family Security, Business Security">
+
+    <title>Versus Nerve - Personal & Business Cybersecurity Protection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #00ffff;
+            z-index: 1000;
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 30px #00ffff;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: #00ffff;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: heroGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes heroGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3)); }
+            100% { filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.6)); }
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px #00ffff;
+            letter-spacing: 2px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+        
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            color: #00ffff;
+            border-color: #00ffff;
+        }
+        
+        .btn-primary:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 30px #00ffff;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            color: #ff0080;
+            border-color: #ff0080;
+        }
+        
+        .btn-secondary:hover {
+            background: #ff0080;
+            color: #000;
+            box-shadow: 0 0 30px #ff0080;
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #d0d0d0;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffff;
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+        }
+        
+        .service-card .icon {
+            font-size: 3rem;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .service-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            color: #d0d0d0;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .service-features li {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+        
+        .service-features li:before {
+            content: "▶";http://vergusnerve.byethost9.com
+            color: #00ffff;
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+        
+        .priority-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ff0080;
+            color: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .academy-section {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.05) 0%, rgba(255, 0, 128, 0.05) 100%);
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .academy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .academy-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 0, 128, 0.3);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .academy-card:hover {
+            border-color: #ff0080;
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .academy-card .icon {
+            font-size: 3rem;
+            color: #ff0080;
+            margin-bottom: 1rem;
+        }
+        
+        .academy-card h3 {
+            font-family: 'Orbitron', monospace;
+            color: #ff0080;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .tech-services-section {
+            background: linear-gradient(135deg, rgba(255, 0, 128, 0.05) 0%, rgba(0, 255, 255, 0.05) 100%);
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid #00ffff;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section a {
+            color: #d0d0d0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #00ffff;
+        }
+        
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #00ffff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                padding: 2rem;
+            }
+        }
+        
+        .pulse-effect {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+        }
+        
+        .glitch-text {
+            position: relative;
+        }
+        
+        .glitch-text:before,
+        .glitch-text:after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text:before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0080;
+            z-index: -1;
+        }
+        
+        .glitch-text:after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% {
+                transform: translate(0);
+            }
+            15%, 49% {
+                transform: translate(-2px, -1px);
+            }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% {
+                transform: translate(0);
+            }
+            21%, 62% {
+                transform: translate(2px, 1px);
+            }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: #00ffff;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            color: #d0d0d0;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo glitch-text" data-text="VERSUS NERVE">VERSUS NERVE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#protection">Protection</a></li>
+                <li><a href="#academy">Academy</a></li>
+                <li><a href="#tech-services">Tech Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="glitch-text" data-text="VERSUS NERVE">VERSUS NERVE</h1>
+            <div class="subtitle">Personal & Business Cybersecurity Shield</div>
+            <div class="tagline">Protect your digital life, secure your family, safeguard your business. From mobile devices to home networks, we're your cybersecurity command center.</div>
+            <div class="cta-buttons">
+                <a href="#protection" class="btn btn-primary pulse-effect">Secure My Life</a>
+                <a href="#academy" class="btn btn-secondary">Learn Protection</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trust Indicators -->
+    <section class="section" style="padding: 3rem 0;">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Devices Protected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Families Secured</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Monitoring Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Recovery Success</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="protection" class="section">
+        <div class="container">
+            <h2 class="section-title">Digital Protection Services</h2>
+            <div class="section-subtitle">Comprehensive cybersecurity solutions for your personal life, family, and small business</div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="priority-badge">Most Popular</div>
+                    <div class="icon">📱</div>
+                    <h3>Mobile Device Security</h3>
+                    <p>Complete protection for smartphones and tablets. Secure your most personal device from threats, theft, and privacy breaches.</p>
+                    <ul class="service-features">
+                        <li>Anti-malware & virus protection</li>
+                        <li>Lost/stolen device tracking & recovery</li>
+                        <li>App security scanning</li>
+                        <li>Privacy protection & data encryption</li>
+                        <li>Remote wipe capabilities</li>
+                        <li>Safe browsing & phishing protection</li>
+                    </ul>
+                    <a href="mobile-security-guide.html" class="btn btn-primary">Secure My Phone</a>
+                </div>
+                
+                   <div class="service-card">
+                    <div class="priority-badge">Family Essential</div>
+                    <div class="icon">🏠</div>
+                    <h3>Home Network Security</h3>
+                    <p>Transform your home into a digital fortress. Secure all connected devices and protect your family's online activities.</p>
+                    <ul class="service-features">
+                        <li>Router security configuration</li>
+                        <li>WiFi network protection & monitoring</li>
+                        <li>IoT device security (smart TVs, cameras, etc.)</li>
+                        <li>Parental controls & content filtering</li>
+                        <li>Network intrusion detection</li>
+                        <li>Guest network setup</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Secure My Home</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Monitoring & Safety</h3>
+                    <p>Keep your loved ones safe in the digital world. Monitor, protect, and stay connected with advanced family safety tools.</p>
+                    <ul class="service-features">
+                        <li>Real-time location tracking</li>
+                        <li>Device usage monitoring</li>
+                        <li>Social media activity oversight</li>
+                        <li>Cyberbullying detection & alerts</li>
+                        <li>Screen time management</li>
+                        <li>Emergency location sharing</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Protect My Family</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">💼</div>
+                    <h3>Small Business Protection</h3>
+                    <p>Enterprise-grade security for small businesses. Protect your company data, customer information, and business operations.</p>
+                    <ul class="service-features">
+                        <li>Employee device management</li>
+                        <li>Business network security</li>
+                        <li>Data backup & recovery solutions</li>
+                        <li>Email security & spam protection</li>
+                        <li>Compliance assistance (GDPR, HIPAA)</li>
+                        <li>Security awareness training</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Secure My Business</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">🔓</div>
+                    <h3>Account Recovery & Protection</h3>
+                    <p>Recover hacked accounts and implement bulletproof protection. Get your digital life back and keep it secure.</p>
+                    <ul class="service-features">
+                        <li>Hacked social media account recovery</li>
+                        <li>Email account security restoration</li>
+                        <li>Identity theft resolution</li>
+                        <li>Two-factor authentication setup</li>
+                        <li>Password manager implementation</li>
+                        <li>Account monitoring services</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Recover My Accounts</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Penetration Testing</h3>
+                    <p>Professional security assessments for your personal or business digital assets. Know your vulnerabilities before attackers do.</p>
+                    <ul class="service-features">
+                        <li>Home network vulnerability assessment</li>
+                        <li>Small business security testing</li>
+                        <li>Web application security review</li>
+                        <li>Social engineering awareness tests</li>
+                        <li>Security recommendations report</li>
+                        <li>Follow-up security implementation</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Test My Security</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="academy" class="section academy-section">
+        <div class="container">
+            <h2 class="section-title">Cybersecurity Academy</h2>
+            <div class="section-subtitle">Learn to protect yourself with expert knowledge, practical tutorials, and certified training programs</div>
+            
+            <div class="academy-grid">
+                <div class="academy-card">
+                    <div class="icon">📖</div>
+                    <h3>Free Security Articles</h3>
+                    <p>Comprehensive guides on mobile security, home network protection, and digital privacy. Updated weekly with latest threats and solutions.</p>
+                    <a href="#" class="btn btn-secondary">Read Articles</a>
+                </div>
+                
+                <div class="academy-card">
+                    <div class="icon">🎥</div>
+                    <h3>Video Tutorials</h3>
+                    <p>Step-by-step video guides showing you how to secure your devices, protect your accounts, and implement security best practices.</p>
+                    <a href="#" class="btn btn-secondary">Watch Videos</a>
+                </div>
+                
+                <div class="academy-card">
+                    <div class="icon">👨‍🏫</div>
+                    <h3>Personal Consulting</h3>
+                    <p>One-on-one cybersecurity consulting sessions. Get personalized advice for your specific security needs and concerns.</p>
+                    <a href="#" class="btn btn-secondary">Book Consultation</a>
+                </div>
+                
+                <div class="academy-card">
+                    <div class="icon">🏆</div>
+                    <h3>Certification Courses</h3>
+                    <p>Earn recognized cybersecurity certifications. From basic digital literacy to advanced security professional credentials.</p>
+                    <a href="#" class="btn btn-secondary">Get Certified</a>
+                </div>
+                
+                <div class="academy-card">
+                    <div class="icon">🤝</div>
+                    <h3>Partner Training</h3>
+                    <p>Access premium courses from leading cybersecurity training platforms at discounted rates through our partnerships.</p>
+                    <a href="#" class="btn btn-secondary">Explore Partners</a>
+                </div>
+                
+                <div class="academy-card">
+                    <div class="icon">📊</div>
+                    <h3>Security Assessments</h3>
+                    <p>Free online security assessments to evaluate your current protection level and get personalized improvement recommendations.</p>
+                    <a href="#" class="btn btn-secondary">Take Assessment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="tech-services" class="section tech-services-section">
+        <div class="container">
+            <h2 class="section-title">Technical Services</h2>
+            <div class="section-subtitle">Complete IT solutions for individuals and small businesses - from repairs to infrastructure design</div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">🔧</div>
+                    <h3>Device Repair & Recovery</h3>
+                    <p>Professional repair services for all your devices with security-first approach to data protection.</p>
+                    <ul class="service-features">
+                        <li>Mobile phone & tablet repair</li>
+                        <li>Laptop & desktop computer repair</li>
+                        <li>Data recovery from damaged devices</li>
+                        <li>Virus removal & system cleanup</li>
+                        <li>Hardware upgrades & optimization</li>
+                        <li>Secure data transfer & migration</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Repair My Device</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">🌐</div>
+                    <h3>Network Design & Setup</h3>
+                    <p>Professional network infrastructure design and implementation for homes and small businesses.</p>
+                    <ul class="service-features">
+                        <li>Network topology design</li>
+                        <li>Router & switch configuration</li>
+                        <li>WiFi optimization & coverage</li>
+                        <li>Network security implementation</li>
+                        <li>Remote access solutions</li>
+                        <li>Performance monitoring setup</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Design My Network</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">🖥️</div>
+                    <h3>Server Infrastructure</h3>
+                    <p>Server setup, configuration, and management for small businesses with security and performance focus.</p>
+                    <ul class="service-features">
+                        <li>Server hardware selection</li>
+                        <li>Operating system installation</li>
+                        <li>Security configuration & hardening</li>
+                        <li>Backup & disaster recovery</li>
+                        <li>Remote monitoring & maintenance</li>
+                        <li>Scalability planning</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Setup My Server</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="icon">📈</div>
+                    <h3>Digital Marketing & SEO</h3>
+                    <p>Secure and effective digital marketing solutions that protect your brand while growing your business.</p>
+                    <ul class="service-features">
+                        <li>Secure website development</li>
+                        <li>SEO optimization & strategy</li>
+                        <li>Social media security setup</li>
+                        <li>Online reputation management</li>
+                        <li>Digital privacy compliance</li>
+                        <li>Analytics & performance tracking</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Grow My Business</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Protection Services</h3>
+                <a href="#">Mobile Device Security</a>
+                <a href="#">Home Network Security</a>
+                <a href="#">Family Safety Monitoring</a>
+                <a href="#">Small Business Protection</a>
+                <a href="#">Account Recovery</a>
+                <a href="#">Penetration Testing</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Academy</h3>
+                <a href="#">Security Articles</a>
+                <a href="#">Video Tutorials</a>
+                <a href="#">Personal Consulting</a>
+                <a href="#">Certification Courses</a>
+                <a href="#">Partner Training</a>
+                <a href="#">Assessments</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Technical Services</h3>
+                <a href="#">Device Repairs</a>
+                <a href="#">Network Setup</a>
+                <a href="#">Server Infrastructure</a>
+                <a href="#">Digital Marketing</a>
+                <a href="#">Data & Password Recovery</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <a href="mailto:support@vergusnerve.com">support@vergusnerve.com</a>
+                <a href="#">+27 123 456 7890</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Telegram</a>
+                <a href="#">Facebook Page</a>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #00ffff; padding-top: 1rem; color: #aaa; font-size: 0.9rem;">
+            &copy; 2025 Vergus Nerve. All rights reserved. | Designed for Security. Powered by Purpose.
+        </div>
+    </div>
+</footer>
