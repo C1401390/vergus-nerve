@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vergus Nerve — Personal & Business Cybersecurity Protection. Protect your digital life, secure your family, safeguard your business.">
+  <title>VERGUS_NERVE // CYBERSECURITY OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:   #000000;
+      --bg:      #030507;
+      --bg2:     #080d12;
+      --bg3:     #0d1520;
+      --panel:   #050a10;
+      --cyan:    #00e5ff;
+      --cyan2:   #00b8cc;
+      --pink:    #ff006a;
+      --pink2:   #cc0055;
+      --green:   #00ff41;
+      --amber:   #ffb300;
+      --dim:     rgba(0,229,255,0.08);
+      --border:  rgba(0,229,255,0.15);
+      --border2: rgba(0,229,255,0.3);
+      --text:    #c8d8e8;
+      --text-dim:#4a6a7a;
+      --mono:    'Share Tech Mono', monospace;
+      --display: 'Bebas Neue', sans-serif;
+      --body:    'Space Grotesk', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      border: 1px solid var(--cyan);
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.05s;
+    }
+    .cursor-dot {
+      position: fixed; width: 3px; height: 3px;
+      background: var(--cyan); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+    }
+
+    /* ── SCANLINES ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+      );
+      pointer-events: none; z-index: 8000;
+    }
+
+    /* ── BOOT SCREEN ── */
+    #boot {
+      position: fixed; inset: 0;
+      background: var(--black);
+      z-index: 9000;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: var(--mono);
+    }
+    .boot-logo {
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .boot-sub {
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      color: var(--text-dim); margin-bottom: 3rem;
+    }
+    .boot-lines {
+      width: min(440px, 90vw);
+      font-size: 0.72rem; color: var(--text-dim);
+      line-height: 2;
+    }
+    .boot-line { opacity: 0; }
+    .boot-line.ok::after { content: '  [OK]'; color: var(--green); }
+    .boot-bar {
+      width: min(440px, 90vw); height: 2px;
+      background: rgba(0,229,255,0.15);
+      margin-top: 1.5rem; overflow: hidden;
+    }
+    .boot-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      transition: width 0.1s linear;
+    }
+    .boot-pct {
+      font-size: 0.65rem; color: var(--cyan);
+      margin-top: 0.5rem; text-align: right;
+      width: min(440px, 90vw);
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex; min-height: 100vh;
+      opacity: 0; transition: opacity 0.6s;
+    }
+    .layout.visible { opacity: 1; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 220px; flex-shrink: 0;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; bottom: 0;
+      display: flex; flex-direction: column;
+      padding: 1.5rem 0;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .sidebar-logo {
+      padding: 0 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-logo .vn {
+      font-family: var(--display);
+      font-size: 1.6rem; letter-spacing: 0.08em;
+      color: var(--cyan); line-height: 1;
+    }
+    .sidebar-logo .tagline {
+      font-family: var(--mono);
+      font-size: 0.56rem; color: var(--text-dim);
+      letter-spacing: 0.12em; margin-top: 0.3rem;
+    }
+    .sidebar-section {
+      font-family: var(--mono);
+      font-size: 0.55rem; letter-spacing: 0.14em;
+      color: var(--text-dim);
+      padding: 0 1.2rem; margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.6rem 1.2rem;
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-item:hover, .nav-item.active {
+      color: var(--cyan);
+      border-left-color: var(--cyan);
+      background: var(--dim);
+    }
+    .nav-item .nav-num {
+      font-size: 0.55rem; color: inherit; opacity: 0.5;
+    }
+    .sidebar-spacer { flex: 1; }
+    .sys-monitor {
+      padding: 1rem 1.2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+    .sys-row {
+      display: flex; justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+    .sys-row .val { color: var(--cyan); }
+    .sys-row .val.green { color: var(--green); }
+    .sys-row .val.pink { color: var(--pink); }
+    .status-dot {
+      display: inline-block; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--green);
+      animation: blink-dot 2s ease-in-out infinite;
+      margin-right: 4px; vertical-align: middle;
+    }
+    @keyframes blink-dot {
+      0%,100%{opacity:1} 50%{opacity:0.2}
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: fixed; top: 0; left: 220px; right: 0;
+      height: 44px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem; z-index: 99;
+    }
+    .topbar-left {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+    .topbar-left span { color: var(--cyan); }
+    .topbar-right {
+      display: flex; align-items: center; gap: 1.5rem;
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--text-dim);
+    }
+    .topbar-right .coords span { color: var(--amber); }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      margin-left: 220px;
+      margin-top: 44px;
+      flex: 1; min-height: calc(100vh - 44px);
+    }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .section-id {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.16em; color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .section-id .slash { color: var(--cyan); }
+    h2.sec-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      letter-spacing: 0.06em;
+      color: var(--cyan); line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    h2.sec-title .pink { color: var(--pink); }
+    .sec-sub {
+      font-size: 0.85rem; color: var(--text-dim);
+      font-family: var(--mono); line-height: 1.7;
+      max-width: 600px; margin-bottom: 3rem;
+    }
+
+    /* ── HERO ── */
+    #home {
+      min-height: calc(100vh - 44px);
+      display: flex; align-items: center;
+      background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,229,255,0.04) 0%, transparent 70%);
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; width: 100%;
+    }
+    .hero-left { }
+    .hero-sys {
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--text-dim); letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-sys::before {
+      content: ''; width: 24px; height: 1px; background: var(--cyan);
+    }
+    .hero-h1 {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      letter-spacing: 0.06em; line-height: 0.95;
+      color: #fff; margin-bottom: 1.5rem;
+    }
+    .hero-h1 .accent { color: var(--cyan); }
+    .hero-h1 .pink { color: var(--pink); }
+    .hero-desc {
+      font-size: 0.88rem; color: var(--text-dim);
+      line-height: 1.85; max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn {
+      font-family: var(--mono); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.2s; border: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-cyan {
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+    }
+    .btn-cyan:hover {
+      background: var(--cyan); color: var(--black);
+      box-shadow: 0 0 20px rgba(0,229,255,0.3);
+    }
+    .btn-pink {
+      background: transparent;
+      color: var(--pink);
+      border: 1px solid var(--pink);
+    }
+    .btn-pink:hover {
+      background: var(--pink); color: var(--black);
+      box-shadow: 0 0 20px rgba(255,0,106,0.3);
+    }
+    .btn-solid {
+      background: var(--cyan); color: var(--black);
+      border: 1px solid var(--cyan); font-weight: bold;
+    }
+    .btn-solid:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* Hero right — terminal window */
+    .terminal-win {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+    }
+    .term-bar {
+      background: var(--bg3);
+      padding: 0.5rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--text-dim);
+    }
+    .dot-r { width: 8px; height: 8px; border-radius: 50%; background: #ff5f56; }
+    .dot-y { width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e; }
+    .dot-g { width: 8px; height: 8px; border-radius: 50%; background: #27c93f; }
+    .term-body {
+      padding: 1.2rem 1.4rem;
+      font-family: var(--mono); font-size: 0.72rem;
+      line-height: 2.1;
+    }
+    .t-prompt { color: var(--cyan); }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--text-dim); padding-left: 1rem; }
+    .t-out.g { color: var(--green); }
+    .t-out.p { color: var(--pink); }
+    .t-out.a { color: var(--amber); }
+    .t-blink {
+      display: inline-block; width: 7px; height: 13px;
+      background: var(--cyan);
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Hero stats bar */
+    .stat-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 1.8rem; letter-spacing: 0.06em;
+      color: var(--cyan);
+    }
+    .stat-num.pink { color: var(--pink); }
+    .stat-lbl {
+      font-family: var(--mono); font-size: 0.55rem;
+      color: var(--text-dim); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-top: 0.2rem;
+    }
+
+    /* ── SERVICE CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .card {
+      background: var(--bg2);
+      padding: 2rem;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .card:hover { background: var(--bg3); }
+    .card:hover .card-arrow { opacity: 1; transform: translate(3px,-3px); }
+    .card-num {
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--text-dim); margin-bottom: 1rem;
+    }
+    .card-icon {
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: var(--display);
+      font-size: 1.2rem; letter-spacing: 0.06em;
+      color: var(--cyan); margin-bottom: 0.6rem;
+    }
+    .card h3.pink { color: var(--pink); }
+    .card p {
+      font-size: 0.8rem; color: var(--text-dim);
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+    .card-features {
+      list-style: none;
+      font-family: var(--mono); font-size: 0.68rem;
+      color: var(--text-dim); line-height: 2;
+    }
+    .card-features li::before {
+      content: '▸ '; color: var(--cyan);
+    }
+    .card-features li.pink::before { color: var(--pink); }
+    .card-tag {
+      display: inline-block;
+      font-family: var(--mono); font-size: 0.55rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      background: rgba(0,229,255,0.08);
+      color: var(--cyan);
+      border: 1px solid rgba(0,229,255,0.2);
+      margin-bottom: 1rem;
+    }
+    .card-tag.pink {
+      background: rgba(255,0,106,0.08);
+      color: var(--pink);
+      border-color: rgba(255,0,106,0.2);
+    }
+    .card-arrow {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: var(--mono); font-size: 0.7rem;
+      color: var(--cyan); opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .card .card-cta {
+      margin-top: 1.5rem;
+    }
+
+    /* ── ACADEMY ── */
+    .academy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .aca-card {
+      background: var(--bg2); padding: 2rem;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .aca-card:hover { background: var(--bg3); }
+    .aca-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+    .aca-card h3 {
+      font-family: var(--display);
+      font-size: 1.1rem; letter-spacing: 0.06em;
+      color: var(--pink); margin-bottom: 0.6rem;
+    }
+    .aca-card p {
+      font-size: 0.78rem; color: var(--text-dim);
+      line-height: 1.65; margin-bottom: 1.2rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .contact-form { }
+    .form-label {
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); display: block;
+      margin-bottom: 0.4rem;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--mono); font-size: 0.78rem;
+      padding: 0.7rem 0.9rem;
+      outline: none; margin-bottom: 1.2rem;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--cyan); }
+    .form-input::placeholder { color: var(--text-dim); }
+    textarea.form-input { resize: vertical; min-height: 100px; }
+    .contact-info { font-family: var(--mono); }
+    .ci-block { margin-bottom: 2rem; }
+    .ci-label {
+      font-size: 0.55rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-bottom: 0.4rem;
+    }
+    .ci-val { font-size: 0.82rem; color: var(--cyan); }
+    .ci-val a { color: inherit; text-decoration: none; }
+    .ci-val a:hover { color: var(--white); }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-left: 0;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      font-family: var(--mono);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 2.5rem;
+    }
+    .footer-brand .vn {
+      font-family: var(--display);
+      font-size: 1.8rem; letter-spacing: 0.08em;
+      color: var(--cyan); margin-bottom: 0.5rem;
+    }
+    .footer-brand p {
+      font-size: 0.7rem; color: var(--text-dim);
+      line-height: 1.7; max-width: 240px;
+    }
+    .footer-col h4 {
+      font-size: 0.58rem; letter-spacing: 0.14em;
+      color: var(--text-dim); text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a {
+      font-size: 0.72rem; color: var(--text-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--cyan); }
+    .footer-bottom {
+      display: flex; justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem; border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.65rem; color: var(--text-dim); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main, .topbar { margin-left: 0; left: 0; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .terminal-win { display: none; }
+      .stat-bar { grid-template-columns: repeat(2,1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .section { padding: 4rem 1.5rem; }
+      .footer { padding: 2rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .academy-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .stat-bar { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+
+<!-- BOOT SCREEN -->
+<div id="boot">
+  <div class="boot-logo">VERGUS_NERVE</div>
+  <div class="boot-sub">// CYBERSECURITY PROTECTION SYSTEM v2.1</div>
+  <div class="boot-lines" id="boot-lines">
+    <div class="boot-line" id="bl1">LOADING PROTECTION MODULES...</div>
+    <div class="boot-line" id="bl2">INITIALIZING THREAT DETECTION ENGINE...</div>
+    <div class="boot-line" id="bl3">CONNECTING TO SECURITY NETWORK...</div>
+    <div class="boot-line" id="bl4">CALIBRATING OSINT SENSORS...</div>
+    <div class="boot-line" id="bl5">MOUNTING ENCRYPTED PARTITION...</div>
+    <div class="boot-line" id="bl6">ALL SYSTEMS NOMINAL</div>
+  </div>
+  <div class="boot-bar"><div class="boot-fill" id="boot-fill"></div></div>
+  <div class="boot-pct" id="boot-pct">0%</div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="vn">VERGUS<br>NERVE</div>
+      <div class="tagline">// CYBER_SHIELD_ACTIVE</div>
+    </div>
+    <div class="sidebar-section">// NAVIGATION</div>
+    <a href="#home" class="nav-item active">
+      <span class="nav-num">00</span> HOME
+    </a>
+    <a href="#protection" class="nav-item">
+      <span class="nav-num">01</span> PROTECTION
+    </a>
+    <a href="#academy" class="nav-item">
+      <span class="nav-num">02</span> ACADEMY
+    </a>
+    <a href="#tech" class="nav-item">
+      <span class="nav-num">03</span> TECH SERVICES
+    </a>
+    <a href="#contact" class="nav-item">
+      <span class="nav-num">04</span> CONTACT
+    </a>
+    <div class="sidebar-spacer"></div>
+    <div class="sys-monitor">
+      <div class="sys-row">
+        <span>STATUS</span>
+        <span class="val green"><span class="status-dot"></span>ONLINE</span>
+      </div>
+      <div class="sys-row">
+        <span>SHIELD</span>
+        <span class="val">ACTIVE</span>
+      </div>
+      <div class="sys-row">
+        <span>THREATS</span>
+        <span class="val pink" id="threat-count">SCANNING</span>
+      </div>
+      <div class="sys-row">
+        <span>UPTIME</span>
+        <span class="val" id="uptime">00:00:00</span>
+      </div>
+      <div class="sys-row" style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)">
+        <span>LOCATION</span>
+        <span class="val">ZA / CPT</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>VERGUS_NERVE</span> // PROTECTION_OS &nbsp;·&nbsp;
+      SECTOR_07 &nbsp;·&nbsp;
+      <span>SHIELD_ACTIVE</span>
+    </div>
+    <div class="topbar-right">
+      <span class="coords">X: <span id="cx">000</span> Y: <span id="cy">000</span></span>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="section" id="home" style="border-bottom:1px solid var(--border)">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-sys">SYSTEM_ID: VN_CYBER_SHIELD // v2.1.0</div>
+          <h1 class="hero-h1">
+            PROTECT<br>
+            <span class="accent">YOUR</span><br>
+            <span class="pink">DIGITAL</span><br>
+            WORLD
+          </h1>
+          <p class="hero-desc">
+            Personal &amp; Business Cybersecurity Shield. Protect your digital life, secure your family, safeguard your business. From mobile devices to home networks — your cybersecurity command center.
+          </p>
+          <div class="hero-cta">
+            <a href="#protection" class="btn btn-cyan">// SECURE_MY_LIFE</a>
+            <a href="#academy" class="btn btn-pink">// LEARN_PROTECTION</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="terminal-win">
+            <div class="term-bar">
+              <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+              <span style="margin-left:0.5rem">vergus_nerve@shield:~</span>
+            </div>
+            <div class="term-body">
+              <div><span class="t-prompt">❯</span> <span class="t-cmd">./shield.sh --activate</span></div>
+              <div class="t-out g">[+] Protection modules loaded</div>
+              <div class="t-out g">[+] Threat detection ONLINE</div>
+              <div class="t-out">[*] Scanning network...</div>
+              <div class="t-out a">[!] 3 vulnerabilities detected</div>
+              <div class="t-out g">[+] Patching automatically...</div>
+              <div class="t-out g">[✓] All threats neutralized</div>
+              <div style="margin-top:0.3rem"><span class="t-prompt">❯</span> <span class="t-cmd">status --report</span></div>
+              <div class="t-out g">SHIELD: ACTIVE &nbsp;·&nbsp; RISK: LOW &nbsp;·&nbsp; UPTIME: 99.9%</div>
+              <div class="t-out">DEVICES: 3 protected &nbsp;·&nbsp; ALERTS: 0</div>
+              <div style="margin-top:0.3rem"><span class="t-prompt">❯</span> <span class="t-blink"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Stats -->
+      <div class="stat-bar" style="margin-top:3rem;border:1px solid var(--border)">
+        <div class="stat-item">
+          <div class="stat-num">10K+</div>
+          <div class="stat-lbl">Devices Protected</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num pink">500+</div>
+          <div class="stat-lbl">Families Secured</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24/7</div>
+          <div class="stat-lbl">Monitoring Available</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num pink">100%</div>
+          <div class="stat-lbl">Recovery Success</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROTECTION SERVICES -->
+    <section class="section" id="protection">
+      <div class="section-id"><span class="slash">//</span> 01_PROTECTION_SERVICES</div>
+      <h2 class="sec-title">DIGITAL <span class="pink">PROTECTION</span></h2>
+      <p class="sec-sub">Comprehensive cybersecurity solutions for your personal life, family, and small business. Every threat neutralized. Every device secured.</p>
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-tag">MOST POPULAR</span>
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 01</div>
+          <div class="card-icon">📱</div>
+          <h3>MOBILE SECURITY</h3>
+          <p>Complete protection for smartphones and tablets. Secure your most personal device from threats, theft, and privacy breaches.</p>
+          <ul class="card-features">
+            <li>Anti-malware &amp; virus protection</li>
+            <li>Lost/stolen device tracking</li>
+            <li>App security scanning</li>
+            <li>Privacy &amp; data encryption</li>
+            <li>Remote wipe capabilities</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">SECURE_MY_PHONE</a></div>
+        </div>
+        <div class="card">
+          <span class="card-tag">FAMILY ESSENTIAL</span>
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 02</div>
+          <div class="card-icon">🏠</div>
+          <h3>HOME NETWORK</h3>
+          <p>Transform your home into a digital fortress. Secure all connected devices and protect your family's online activities.</p>
+          <ul class="card-features">
+            <li>Router security configuration</li>
+            <li>WiFi network protection</li>
+            <li>IoT device security</li>
+            <li>Parental controls &amp; filtering</li>
+            <li>Intrusion detection</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">SECURE_MY_HOME</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 03</div>
+          <div class="card-icon">👨‍👩‍👧‍👦</div>
+          <h3>FAMILY SAFETY</h3>
+          <p>Keep your loved ones safe in the digital world. Monitor, protect, and stay connected with advanced family safety tools.</p>
+          <ul class="card-features">
+            <li>Real-time location tracking</li>
+            <li>Device usage monitoring</li>
+            <li>Social media oversight</li>
+            <li>Cyberbullying detection</li>
+            <li>Screen time management</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">PROTECT_MY_FAMILY</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 04</div>
+          <div class="card-icon">💼</div>
+          <h3>BUSINESS SHIELD</h3>
+          <p>Enterprise-grade security for small businesses. Protect your company data, customer information, and operations.</p>
+          <ul class="card-features">
+            <li>Employee device management</li>
+            <li>Business network security</li>
+            <li>Data backup &amp; recovery</li>
+            <li>Email security protection</li>
+            <li>Security awareness training</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">SECURE_MY_BUSINESS</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 05</div>
+          <div class="card-icon">🔓</div>
+          <h3>ACCOUNT RECOVERY</h3>
+          <p>Recover hacked accounts and implement bulletproof protection. Get your digital life back and keep it secure.</p>
+          <ul class="card-features">
+            <li>Hacked social media recovery</li>
+            <li>Email account restoration</li>
+            <li>Identity theft resolution</li>
+            <li>2FA setup &amp; hardening</li>
+            <li>Account monitoring</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">RECOVER_ACCOUNTS</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 06</div>
+          <div class="card-icon">🛡️</div>
+          <h3>PENTEST &amp; AUDIT</h3>
+          <p>Professional security assessments for your personal or business digital assets. Know your vulnerabilities first.</p>
+          <ul class="card-features">
+            <li>Home network assessment</li>
+            <li>Web app security review</li>
+            <li>Social engineering tests</li>
+            <li>Vulnerability report</li>
+            <li>Remediation guidance</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">TEST_MY_SECURITY</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMY -->
+    <section class="section" id="academy" style="background:var(--bg2)">
+      <div class="section-id"><span class="slash">//</span> 02_CYBERSECURITY_ACADEMY</div>
+      <h2 class="sec-title">LEARN <span class="pink">PROTECTION</span></h2>
+      <p class="sec-sub">Expert knowledge, practical tutorials, and training programs. Become your own first line of defense.</p>
+      <div class="academy-grid">
+        <div class="aca-card">
+          <div class="icon">📖</div>
+          <h3>FREE ARTICLES</h3>
+          <p>Comprehensive guides on mobile security, home network protection, and digital privacy. Updated weekly.</p>
+          <a href="#" class="btn btn-pink">READ_ARTICLES</a>
+        </div>
+        <div class="aca-card">
+          <div class="icon">🎥</div>
+          <h3>VIDEO TUTORIALS</h3>
+          <p>Step-by-step guides showing you how to secure devices, protect accounts, and implement best practices.</p>
+          <a href="#" class="btn btn-pink">WATCH_VIDEOS</a>
+        </div>
+        <div class="aca-card">
+          <div class="icon">👨‍🏫</div>
+          <h3>CONSULTING</h3>
+          <p>One-on-one cybersecurity sessions. Personalized advice for your specific security needs and concerns.</p>
+          <a href="#contact" class="btn btn-pink">BOOK_SESSION</a>
+        </div>
+        <div class="aca-card">
+          <div class="icon">🏆</div>
+          <h3>CERTIFICATIONS</h3>
+          <p>Earn recognized cybersecurity credentials. From digital literacy to advanced security professional.</p>
+          <a href="#" class="btn btn-pink">GET_CERTIFIED</a>
+        </div>
+        <div class="aca-card">
+          <div class="icon">🤝</div>
+          <h3>PARTNER TRAINING</h3>
+          <p>Access premium courses from leading platforms at discounted rates through our verified partnerships.</p>
+          <a href="#" class="btn btn-pink">EXPLORE_PARTNERS</a>
+        </div>
+        <div class="aca-card">
+          <div class="icon">📊</div>
+          <h3>ASSESSMENTS</h3>
+          <p>Free security assessments to evaluate your current protection level and get improvement recommendations.</p>
+          <a href="#" class="btn btn-pink">TAKE_ASSESSMENT</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH SERVICES -->
+    <section class="section" id="tech">
+      <div class="section-id"><span class="slash">//</span> 03_TECHNICAL_SERVICES</div>
+      <h2 class="sec-title">TECH <span class="pink">SERVICES</span></h2>
+      <p class="sec-sub">Complete IT solutions from device repairs to network infrastructure. Security-first approach on every job.</p>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 01</div>
+          <div class="card-icon">🔧</div>
+          <h3>DEVICE REPAIR</h3>
+          <p>Professional repair services for all devices with a security-first approach to data protection throughout.</p>
+          <ul class="card-features">
+            <li>Mobile phone &amp; tablet repair</li>
+            <li>Laptop &amp; desktop repair</li>
+            <li>Data recovery</li>
+            <li>Virus removal &amp; cleanup</li>
+            <li>Secure data migration</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">REPAIR_MY_DEVICE</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 02</div>
+          <div class="card-icon">🌐</div>
+          <h3>NETWORK DESIGN</h3>
+          <p>Professional network infrastructure design and implementation for homes and small businesses.</p>
+          <ul class="card-features">
+            <li>Network topology design</li>
+            <li>Router &amp; switch config</li>
+            <li>WiFi optimization</li>
+            <li>Security implementation</li>
+            <li>Performance monitoring</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">DESIGN_MY_NETWORK</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 03</div>
+          <div class="card-icon">🖥️</div>
+          <h3>SERVER SETUP</h3>
+          <p>Server configuration and management for small businesses with security and performance focus.</p>
+          <ul class="card-features">
+            <li>Server hardware selection</li>
+            <li>OS installation &amp; hardening</li>
+            <li>Backup &amp; disaster recovery</li>
+            <li>Remote monitoring</li>
+            <li>Scalability planning</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">SETUP_MY_SERVER</a></div>
+        </div>
+        <div class="card">
+          <div class="card-arrow">↗</div>
+          <div class="card-num">// 04</div>
+          <div class="card-icon">📈</div>
+          <h3>DIGITAL MARKETING</h3>
+          <p>Secure and effective digital marketing that protects your brand while growing your online presence.</p>
+          <ul class="card-features">
+            <li>Secure website development</li>
+            <li>SEO optimization</li>
+            <li>Social media security</li>
+            <li>Reputation management</li>
+            <li>Analytics &amp; tracking</li>
+          </ul>
+          <div class="card-cta"><a href="#contact" class="btn btn-cyan">GROW_MY_BUSINESS</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" style="background:var(--bg2)">
+      <div class="section-id"><span class="slash">//</span> 04_ESTABLISH_CONNECTION</div>
+      <h2 class="sec-title">CONTACT <span class="pink">US</span></h2>
+      <p class="sec-sub" style="margin-bottom:3rem">Open a secure channel. We respond within 24 hours. WhatsApp is fastest.</p>
+      <div class="contact-grid">
+        <div>
+          <div class="ci-block">
+            <div class="ci-label">// EMAIL</div>
+            <div class="ci-val"><a href="mailto:support@vergusnerve.com">support@vergusnerve.com</a></div>
+          </div>
+          <div class="ci-block">
+            <div class="ci-label">// WHATSAPP</div>
+            <div class="ci-val"><a href="https://wa.me/27123456789" target="_blank">+27 123 456 7890</a></div>
+          </div>
+          <div class="ci-block">
+            <div class="ci-label">// LOCATION</div>
+            <div class="ci-val">South Africa — Remote &amp; On-Site</div>
+          </div>
+          <div class="ci-block">
+            <div class="ci-label">// RESPONSE TIME</div>
+            <div class="ci-val" style="color:var(--green)">WITHIN 24 HOURS</div>
+          </div>
+          <a href="https://wa.me/27123456789?text=Hi%20Vergus%20Nerve%2C%20I%20need%20help%20with" target="_blank" class="btn btn-solid" style="margin-top:1rem;display:inline-flex">
+            ↗ OPEN_WHATSAPP_CHANNEL
+          </a>
+        </div>
+        <div class="contact-form">
+          <label class="form-label">// YOUR_NAME</label>
+          <input class="form-input" type="text" placeholder="Enter your name">
+          <label class="form-label">// EMAIL_ADDRESS</label>
+          <input class="form-input" type="email" placeholder="your@email.com">
+          <label class="form-label">// SERVICE_NEEDED</label>
+          <select class="form-input">
+            <option value="">SELECT_SERVICE...</option>
+            <option>Mobile Device Security</option>
+            <option>Home Network Security</option>
+            <option>Family Monitoring</option>
+            <option>Business Protection</option>
+            <option>Account Recovery</option>
+            <option>Penetration Testing</option>
+            <option>Device Repair</option>
+            <option>Network Setup</option>
+            <option>Server Infrastructure</option>
+            <option>Digital Marketing</option>
+            <option>Academy / Training</option>
+          </select>
+          <label class="form-label">// MESSAGE</label>
+          <textarea class="form-input" placeholder="Describe what you need..."></textarea>
+          <button class="btn btn-solid" onclick="handleSend(event)" style="width:100%;justify-content:center">
+            TRANSMIT_MESSAGE ↗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="vn">VERGUS<br>NERVE</div>
+          <p>Personal &amp; Business Cybersecurity Shield. Protecting South Africa's digital citizens since 2025.</p>
+        </div>
+        <div class="footer-col">
+          <h4>// PROTECTION</h4>
+          <ul>
+            <li><a href="#protection">Mobile Security</a></li>
+            <li><a href="#protection">Home Network</a></li>
+            <li><a href="#protection">Family Safety</a></li>
+            <li><a href="#protection">Business Shield</a></li>
+            <li><a href="#protection">Account Recovery</a></li>
+            <li><a href="#protection">Pentest &amp; Audit</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>// ACADEMY</h4>
+          <ul>
+            <li><a href="#academy">Free Articles</a></li>
+            <li><a href="#academy">Video Tutorials</a></li>
+            <li><a href="#academy">Consulting</a></li>
+            <li><a href="#academy">Certifications</a></li>
+            <li><a href="#academy">Partner Training</a></li>
+            <li><a href="#academy">Assessments</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>// CONTACT</h4>
+          <ul>
+            <li><a href="mailto:support@vergusnerve.com">support@vergusnerve.com</a></li>
+            <li><a href="#">+27 123 456 7890</a></li>
+            <li><a href="#">WhatsApp</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 VERGUS_NERVE. ALL_RIGHTS_RESERVED // DESIGNED_FOR_SECURITY. POWERED_BY_PURPOSE.</p>
+        <p style="color:var(--cyan)">SHIELD_ACTIVE // ZA_PROTECTION_ONLINE</p>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+// ── CURSOR ──
+const cur = document.getElementById('cursor');
+const dot = document.getElementById('cursor-dot');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+  document.getElementById('cx').textContent = String(e.clientX).padStart(3,'0');
+  document.getElementById('cy').textContent = String(e.clientY).padStart(3,'0');
+});
+document.querySelectorAll('a,button,.btn').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.style.transform = 'translate(-50%,-50%) scale(2)');
+  el.addEventListener('mouseleave', () => cur.style.transform = 'translate(-50%,-50%) scale(1)');
+});
+
+// ── CLOCK ──
+function tick() {
+  const n = new Date();
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('clock').textContent = `${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;
+}
+tick(); setInterval(tick, 1000);
+
+// ── UPTIME ──
+let secs = 0;
+setInterval(() => {
+  secs++;
+  const h = Math.floor(secs/3600), m = Math.floor((secs%3600)/60), s = secs%60;
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('uptime').textContent = `${p(h)}:${p(m)}:${p(s)}`;
+}, 1000);
+
+// ── THREAT COUNTER ──
+const threats = ['0_THREATS','SCANNING...','ALL_CLEAR','MONITORING'];
+let ti = 0;
+setTimeout(() => {
+  document.getElementById('threat-count').textContent = '0_THREATS';
+  setInterval(() => {
+    ti = (ti+1) % threats.length;
+    if(ti === 0 || ti === 2) document.getElementById('threat-count').textContent = threats[ti];
+  }, 8000);
+}, 3000);
+
+// ── ACTIVE NAV ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-item');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => obs.observe(s));
+
+// ── BOOT SEQUENCE ──
+const lines = ['bl1','bl2','bl3','bl4','bl5','bl6'];
+const fill = document.getElementById('boot-fill');
+const pct = document.getElementById('boot-pct');
+let progress = 0;
+const interval = setInterval(() => {
+  progress += 2;
+  fill.style.width = progress + '%';
+  pct.textContent = progress + '%';
+  const lineIndex = Math.floor(progress / (100 / lines.length));
+  if(lineIndex < lines.length) {
+    const el = document.getElementById(lines[lineIndex]);
+    if(el) { el.style.opacity = '1'; el.classList.add('ok'); }
+  }
+  if(progress >= 100) {
+    clearInterval(interval);
+    setTimeout(() => {
+      document.getElementById('boot').style.opacity = '0';
+      document.getElementById('boot').style.transition = 'opacity 0.6s';
+      setTimeout(() => {
+        document.getElementById('boot').style.display = 'none';
+        document.getElementById('layout').classList.add('visible');
+      }, 600);
+    }, 400);
+  }
+}, 40);
+
+// ── FORM ──
+function handleSend(e) {
+  const btn = e.target;
+  btn.textContent = 'TRANSMITTING...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'TRANSMISSION_COMPLETE ✓';
+    btn.style.background = 'var(--green)';
+    btn.style.color = 'var(--black)';
+    setTimeout(() => {
+      btn.textContent = 'TRANSMIT_MESSAGE ↗';
+      btn.disabled = false;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3500);
+  }, 1200);
+}
+</script>
+</body>
+</html>
